@@ -7,5 +7,15 @@
 
 import Foundation
 
-print("Hello, World!")
+//HomeWork1
+var vklad: Double = 1000
+var procent: Double = 5/100
+var period: Double = 5
+
+var summaProcenta = (1 + procent) * (1 + procent) * (1 + procent) * (1 + procent) * (1 + procent)
+var summaVklada = Int (vklad * summaProcenta)
+
+//Ответ
+print (summaVklada)
+
 
