@@ -62,9 +62,11 @@ print(fahrenheit(gradus: 25))
 
 //5. Записная книжка: Создайте массив, который содержит имя, телефон и электронную почту. Затем напишите функцию для поиска записи по имени.
 
-var contacts = [(name:"madina", number: "89483934", email:"valieva9719@mail.ru")]
+
 
 func findContactByName(name: String) -> String? {
+    
+    var contacts = [(name:"madina", number: "89483934", email:"valieva9719@mail.ru")]
     for contact in contacts {
         if contact.name == name {
             print(contacts)
@@ -74,28 +76,27 @@ func findContactByName(name: String) -> String? {
     }
     return nil
 }
-print(findContactByName(name: "madina"))
+print(findContactByName(name: "madina")!
+      
 //6. Перестановка элементов массива: Напишите функцию, которая принимает массив и возвращает новый массив, где первый элемент становится последним, а последний — первым. Остальные элементы остаются на своих местах.
-
-var massive = [65, 54, 6, 45, 5, 9]
-
-
 
 func reversArray(numbers: [Int]) -> [Int] {
     var reversedArray = numbers
     let pocket = numbers.first
     reversedArray[0] = reversedArray.last!
     reversedArray[numbers.count - 1] = pocket!
-    return reversedArray
     
+    return reversedArray
 }
+var massive = [65, 54, 6, 45, 5, 9]
 print(reversArray(numbers: massive))
 
 //7. Форматирование строки: Напишите функцию, которая принимает строку и делает первую букву каждого слова заглавной.
 var someString = "мне осталось решить 13 задач"
 
-func capitalizedString(sm: String) {
-    sm.prefix(1).uppercased() + sm.dropFirst()
+func capitalizedString(sm: String) -> String {
+   var result = sm.prefix(1).uppercased() + sm.dropFirst()
+    return result
 }
 print(capitalizedString(sm: someString))
 
@@ -127,7 +128,7 @@ if let dayOfWeekNumber = dayOfWeekToNumber("Monday") {
     print("Invalid day of the week")
 }
 
-print(dayOfWeekToNumber("Monday"))
+print(dayOfWeekToNumber("Monday")!)
 
 //9. Уникальные символы:Напишите функцию, которая принимает строку и возвращает true, если все символы в строке уникальные, и false в противном случае.
 func sort1(input: String) -> Bool {
@@ -244,4 +245,89 @@ func mergArrays(numberOne: [Int], numbertwo: [Int]) -> [Int] {
 }
 
 print(mergArrays(numberOne: a, numbertwo: b))
+
+//17. Количество слов заданной длины: Напишите функцию, которая принимает строку и число N, а затем возвращает количество слов в строке, длина которых равна N.
+
+var predlozh = "я люблю путешествовать"
+
+func search(word: String, number: Int) -> Int {
+    let wordArray = word.components(separatedBy: .whitespacesAndNewlines)
+    var numb = 0
+    for i in wordArray {
+        if i.count == number {
+            numb += 1
+        }
+    }
+    return numb
+}
+print(search(word: predlozh, number: 2))
+
+//      18. Угадай число: Создайте игру, в которой компьютер случайно выбирает число между 1 и 100, а игрок пытается угадать его за минимальное количество попыток. После каждой попытки компьютер должен сообщать, была ли предыдущая догадка слишком высокой или слишком низкой.
+      
+func guessTheNumber() {
+    let computerNumber = Int.random(in: 1...100)
+    var attempts = 1
+
+    print("Hello! I have chosen a number between 1 and 100. Try to guess it.You have 6 attempts")
+
+    while attempts <= 6 {
+        
+        print("Enter your guess: ", terminator: "")
+            guard let input = readLine() else {
+                continue
+            }
+
+            if let guess = Int(input) {
+                attempts += 1
+                switch guess {
+                case guess where guess < computerNumber:
+                    print("Too low. Try again.")
+                case guess where guess > computerNumber:
+                    print("Too high. Try again.")
+                default:
+                    print("Congratulations! You guessed the number \(computerNumber) in \(attempts) attempts.")
+                    return
+                }
+                 } else {
+                  print("Please enter a valid number.")
+           }
+        }
+    }
+
+
+guessTheNumber()
+
+
+//19. Задание: Простой шифратор и дешифратор слов с использованием замены букв .
+//Описание:Реализуйте метод шифрования, который будет заменять определенные буквы другими буквами и метод дешифрования для восстановления исходного сообщения.
+//Требования:
+//Создайте функцию encode, которая принимает строку и возвращает зашифрованную строку, заменяя a на z, b на y, c на x и так далее.
+//Создайте функцию decode, которая принимает зашифрованную строку и возвращает исходную строку, производя обратную замену.
+//
+
+func encode(_ input: String) -> String {
+    let alphabet = "abcdefghijklmnopqrstuvwxyz"
+    let reversedAlphabet = "zyxwvutsrqponmlkjihgfedcba"
+    var encoded = ""
+    
+    for char in input.lowercased() {
+        if let index = alphabet.firstIndex(of: char) {
+            let reversedChar = reversedAlphabet[index]
+            encoded.append(reversedChar)
+        } else {
+            encoded.append(char)
+        }
+    }
+    
+    return encoded
+}
+print(encode("madina"))
+
+func decode(_ input: String) -> String {
+    return encode(input)
+}
+let originalMessage = "nzwrmz"
+
+print(decode(originalMessage))
+
 
